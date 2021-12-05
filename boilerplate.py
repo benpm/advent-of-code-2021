@@ -1,13 +1,17 @@
 from aocd import lines, submit
+import numpy as np
 
 PART = 0
 EXAMPLE = True
+SUBMIT = False
 
 if EXAMPLE:
     with open("test.txt", "r") as f:
         lines = f.readlines()
 
-lines = [l.strip() for l in lines if l != "\n"]
+lines = [l.strip() for l in lines]
+if lines[-1] == "":
+    lines = lines[:-1]
 
 
 # ---------------------------------------------------------------------------
@@ -37,5 +41,5 @@ def part_B():
 
 ans = part_A() if PART == 0 else part_B()
 print("ANSWER:", ans)
-if not EXAMPLE and ans != 0:
+if SUBMIT and not EXAMPLE and ans != 0:
     submit(ans)

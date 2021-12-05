@@ -43,12 +43,6 @@ def part_A():
                     if np.sum(c) == 0:
                         print(bb)
                         return np.sum(bb) * cal
-                # if np.trace(bb) == 0:
-                #     print(bb)
-                #     return 0
-                # if np.trace(np.rot90(bb)) == 0:
-                #     print(bb)
-                #     return 0
     return 0
 
 
