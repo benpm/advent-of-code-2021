@@ -1,17 +1,27 @@
-from aocd import lines, submit
+from aocd import lines, submit, data
 import numpy as np
+from sys import argv
 
-PART = 0
-EXAMPLE = True
-SUBMIT = False
+assert len(argv) == 4, "args: [part A/B] [example? t/f] [submit? t/f]"
+assert argv[1] in ['A', 'B'], "part must be A or B"
+assert argv[2] in ['t', 'f'], "example must be t or f"
+assert argv[3] in ['t', 'f'], "submit must be t or f"
+
+PART = argv[1]
+EXAMPLE = (argv[2] == "t")
+SUBMIT = (argv[3] == "t")
 
 if EXAMPLE:
     with open("test.txt", "r") as f:
         lines = f.readlines()
+    data = "\n".join(lines)
 
 lines = [l.strip() for l in lines]
+
 if lines[-1] == "":
     lines = lines[:-1]
+if data[-1] == "\n":
+    data = data[:-1]
 
 
 # ---------------------------------------------------------------------------

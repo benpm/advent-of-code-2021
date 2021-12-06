@@ -5,11 +5,57 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "Python: Current File",
+            "name": "Part A: Example",
             "type": "python",
             "request": "launch",
             "program": "${file}",
             "console": "integratedTerminal",
+            "args": ["A", "t", "f"],
+            "cwd": "${fileDirname}"
+        },
+        {
+            "name": "Part A: Input",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": ["A", "f", "f"],
+            "cwd": "${fileDirname}"
+        },
+        {
+            "name": "Part A: Submit",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": ["A", "f", "t"],
+            "cwd": "${fileDirname}"
+        },
+        {
+            "name": "Part B: Example",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": ["B", "t", "f"],
+            "cwd": "${fileDirname}"
+        },
+        {
+            "name": "Part B: Input",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": ["B", "f", "f"],
+            "cwd": "${fileDirname}"
+        },
+        {
+            "name": "Part B: Submit",
+            "type": "python",
+            "request": "launch",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "args": ["B", "f", "t"],
             "cwd": "${fileDirname}"
         }
     ]
