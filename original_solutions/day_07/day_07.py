@@ -1,4 +1,4 @@
-from aocd import get_data
+from aocd import lines, submit
 import numpy as np
 from sys import argv
 from collections import defaultdict
@@ -29,9 +29,16 @@ if lines[-1] == "":
 
 
 def part_A():
-    for l in lines:
-        print(l)
-    return 0
+    cbs = np.array([int(n) for n in lines[0].split(",")])
+    st = cbs.min()
+    ed = cbs.max()
+    mn = 2**32
+    for i in range(st, ed+1):
+        dst = np.abs(cbs - i)
+        if dst.sum() < mn:
+            mn = dst.sum()
+    ans = mn
+    return ans
 
 
 # ---------------------------------------------------------------------------
@@ -40,9 +47,16 @@ def part_A():
 
 
 def part_B():
-    for l in lines:
-        print(l)
-    return 0
+    cbs = np.array([int(n) for n in lines[0].split(",")])
+    st = cbs.min()
+    ed = cbs.max()
+    mn = 2**32
+    for i in range(st, ed+1):
+        dst = (np.abs(cbs - i) * (np.abs(cbs - i) + 1)) // 2
+        if dst.sum() < mn:
+            mn = dst.sum()
+    ans = mn
+    return ans
 
 
 # ---------------------------------------------------------------------------

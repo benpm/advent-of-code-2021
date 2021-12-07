@@ -11,6 +11,7 @@
             "program": "${file}",
             "console": "integratedTerminal",
             "args": ["A", "t", "f"],
+            "preLaunchTask": "clear",
             "cwd": "${fileDirname}"
         },
         {
