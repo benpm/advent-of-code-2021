@@ -13,6 +13,8 @@ PART = argv[1]
 EXAMPLE = (argv[2] == "t")
 SUBMIT = (argv[3] == "t")
 
+lines = get_data(day=9,year=2021).splitlines()
+
 if EXAMPLE:
     with open("test.txt", "r") as f:
         lines = f.readlines()
@@ -30,8 +32,14 @@ if lines[-1] == "":
 
 
 def part_A():
-    for l in lines:
-        print(l)
+    a: np.ndarray = np.array([[int(x) for x in l] for l in lines]) 
+    b = (a==-1)
+    for x in range(a.shape[0]):
+        for y in range(a.shape[1]):
+            for xx, yy in (-1,0), (1,0), (0,-1), (0,-1):
+                if x + xx >= 0 and x + xx < a.shape[0] - 1 and y + yy >= 0 and y + yy < a.shape[1] - 1:
+                    if a[x+xx, y+yy] <= a[x, y]:
+                        b[x, y]
     return 0
 
 
