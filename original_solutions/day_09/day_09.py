@@ -33,25 +33,72 @@ if lines[-1] == "":
 
 def part_A():
     a: np.ndarray = np.array([[int(x) for x in l] for l in lines]) 
-    b = (a==-1)
-    for x in range(a.shape[0]):
-        for y in range(a.shape[1]):
-            for xx, yy in (-1,0), (1,0), (0,-1), (0,-1):
-                if x + xx >= 0 and x + xx < a.shape[0] - 1 and y + yy >= 0 and y + yy < a.shape[1] - 1:
+    s = a.shape
+    rl = np.ndarray(s, dtype=int)
+    for x in range(s[0]):
+        for y in range(s[1]):
+            for xx, yy in (-1,0), (1,0), (0,-1), (0,1):
+                if x + xx >= 0 and x + xx < s[0] and y + yy >= 0 and y + yy < s[1]:
                     if a[x+xx, y+yy] <= a[x, y]:
-                        b[x, y]
-    return 0
+                        rl[x, y] = 0
+                        break
+            else:
+                rl[x, y] = a[x, y] + 1
+
+    return rl.sum()
 
 
 # ---------------------------------------------------------------------------
 # Part B
 # ---------------------------------------------------------------------------
 
+def cpf(x, y):
+    return ((x + y) * (x + y + 1)) // 2 + y
 
 def part_B():
-    for l in lines:
-        print(l)
-    return 0
+    a: np.ndarray = np.array([[int(x) for x in l] for l in lines]) 
+    s = a.shape
+    # Build map of basin indices
+    bmap = np.ndarray(s, dtype=int)
+    bmap.fill(-1)
+    for x in range(s[0]):
+        for y in range(s[1]):
+            if a[x,y] == 9: continue
+            ix = x
+            iy = y
+            st = []
+            # Loop to find basin for current location
+            while True:
+                if bmap[ix, iy] != -1:
+                    idx = bmap[ix, iy]
+                    break
+                st.append((ix, iy))
+                for xx, yy in (-1,0), (1,0), (0,-1), (0,1):
+                    nx = ix + xx
+                    ny = iy + yy
+                    if nx in range(s[0]) and ny in range(s[1]) \
+                        and a[nx, ny] < a[ix, iy]:
+                        ix = nx
+                        iy = ny
+                        break
+                else:
+                    idx = cpf(ix, iy)
+                    break
+
+            bmap[ix, iy] = idx
+            for ix, iy in st:
+                bmap[ix, iy] = idx
+    
+
+    # Determine basin sizes
+    idxs = np.unique(bmap)
+    bsz = []
+    for idx in idxs:
+        if idx != -1:
+            bsz.append(np.sum(bmap == idx))
+    bsz.sort()
+
+    return bsz[-3] * bsz[-2] * bsz[-1]
 
 
 # ---------------------------------------------------------------------------
